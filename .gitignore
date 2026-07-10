@@ -5,3 +5,10 @@ dist/
 *.bak
 .DS_Store
 .a5c/
+
+# env & local secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+dev.vars
