@@ -1,12 +1,12 @@
 # Credential Handling Policy — Mode B (Done-for-you)
 
-**Scope**: Applies when a client provides live portal login credentials for Zynera to edit their listing.
+**Scope**: Applies when a client provides live portal login credentials for Qualis Studio to edit their listing.
 
 ## Principles
 
 1. **No persistent plaintext storage.** Credentials are used only for the duration of the edit session and are never written to disk, database, or any persistent store.
 2. **Prompt revocation.** Credentials are discarded (session closed, no cached tokens) immediately after the edited listing is confirmed by the client — same business day at latest.
-3. **2FA limitation.** If the portal requires 2FA, the client must either temporarily disable it or provide a one-time backup code. Zynera does not store 2FA secrets.
+3. **2FA limitation.** If the portal requires 2FA, the client must either temporarily disable it or provide a one-time backup code. Qualis Studio does not store 2FA secrets.
 4. **Client consent is required.** The intake form includes an explicit checkbox acknowledging this policy (see `ContactModal.astro`).
 5. **No sharing.** Credentials are never shared between team members, contractors, or third parties.
 

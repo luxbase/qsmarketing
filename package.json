@@ -1,8 +1,7 @@
 {
   "name": "qualisstudio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Trilingual (ES/EN/PT) static marketing site for Qualis Studio - real-estate digital staging and photo enhancement",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -15,9 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/luxbase/qs.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/luxbase/qs/issues"
   },
@@ -27,5 +23,6 @@
   },
   "dependencies": {
     "astro": "^6.4.6"
-  }
+  },
+  "private": true
 }
