@@ -1,12 +1,11 @@
 ---
 import { t, type Lang } from '../i18n';
-import { WHATSAPP_NUMBER } from '../constants';
+import { WHATSAPP_NUMBER, GOOGLE_APPS_SCRIPT_URL } from '../constants';
 
 interface Props { lang: Lang }
 
 const { lang } = Astro.props;
 const dict = t(lang);
-const SUBMITKIT_URL = "https://submitkit.dev/api/f/cmqe12stc0006sp211lp2fa2e";
 const WHATSAPP_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 const s = dict.modal.steps;
 ---
@@ -31,7 +30,6 @@ const s = dict.modal.steps;
         </div>
 
         <form id="wizardForm" class="wizard-form" novalidate>
-            <input type="hidden" name="_nota" value="Las fotos enviadas están disponibles en https://submitkit.dev/forms">
             <div class="step-content">
                 <div class="step-panel active" data-step="1">
                     <label class="step-label" for="name">{s[0].nameLabel}</label>
@@ -671,7 +669,7 @@ const s = dict.modal.steps;
 </style>
 
 <script define:vars={{
-    SUBMITKIT_URL,
+    APPS_SCRIPT_URL: GOOGLE_APPS_SCRIPT_URL,
     WHATSAPP_BASE,
     NAME_ERROR: s[0].nameError,
     MODE_ERROR: s[0].modeLabel,
@@ -932,8 +930,8 @@ const s = dict.modal.steps;
         if (currentStep > 1) goToStep(currentStep - 1);
     });
 
-    // Submit — native POST via hidden iframe
-    FORM?.addEventListener('submit', (e) => {
+    // Submit — post to Google Apps Script (Drive)
+    FORM?.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (els('btnSubmit').disabled) return;
 
@@ -941,19 +939,54 @@ const s = dict.modal.steps;
         hide(FORM_WRAPPER);
         hide(ERROR);
 
-        FORM.action = SUBMITKIT_URL;
-        FORM.method = 'POST';
-        FORM.enctype = 'multipart/form-data';
-        FORM.target = 'submit-frame';
-        FORM.submit();
+        try {
+            let filesArr = [];
+            if (fileData) {
+                const base64Data = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(fileData);
+                });
+                filesArr.push({
+                    name: fileData.name,
+                    mimeType: fileData.type,
+                    base64: base64Data
+                });
+            }
 
-        const mode = FORM.querySelector('input[name="Modo"]:checked').value;
-        const name = els('name').value.trim();
-        const msg = WA_MESSAGE_TEMPLATE.replace('{name}', name).replace('{mode}', mode);
-        els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
+            const mode = FORM.querySelector('input[name="Modo"]:checked')?.value || '';
+            const style = FORM.querySelector('input[name="Estilo"]:checked')?.value || '';
+            const name = els('name').value.trim();
+            const email = els('email').value.trim();
+            const phone = els('phone').value.trim();
 
-        hide(LOADING);
-        show(SUCCESS);
+            const payload = {
+                nombre: name,
+                email: email,
+                telefono: phone,
+                servicio: mode,
+                mensaje: `Estilo: ${style}`,
+                files: filesArr
+            };
+
+            await fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const msg = WA_MESSAGE_TEMPLATE.replace('{name}', name).replace('{mode}', mode);
+            els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
+
+            hide(LOADING);
+            show(SUCCESS);
+        } catch (err) {
+            console.error('Submission error:', err);
+            hide(LOADING);
+            block(ERROR);
+        }
     });
 
     els('btnRetry')?.addEventListener('click', () => {

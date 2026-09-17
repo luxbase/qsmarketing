@@ -242,7 +242,7 @@ export default {
       },
       {
         heading: 'Terceros',
-        text: 'El formulario utiliza SubmitKit para el envío de datos y archivos, y la coordinación puede continuar por email o WhatsApp. Cuando el producto evolucione a SaaS, esta página deberá actualizarse con los proveedores de hosting, storage, autenticación y procesamiento que se adopten.',
+        text: 'El formulario envía los datos y archivos de forma segura a nuestro almacenamiento privado en Google Drive, y la coordinación puede continuar por email o WhatsApp. Cuando el producto evolucione a SaaS, esta página deberá actualizarse con los proveedores de hosting, storage, autenticación y procesamiento que se adopten.',
       },
       {
         heading: 'Eliminación',

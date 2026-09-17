@@ -242,7 +242,7 @@ export default {
       },
       {
         heading: 'Third parties',
-        text: 'The form uses SubmitKit for data and file submission, and coordination may continue via email or WhatsApp. When the product evolves to SaaS, this page will need to be updated with the hosting, storage, authentication, and processing providers that are adopted.',
+        text: 'The form securely sends data and files to our private storage on Google Drive, and coordination may continue via email or WhatsApp. When the product evolves to SaaS, this page will need to be updated with the hosting, storage, authentication, and processing providers that are adopted.',
       },
       {
         heading: 'Deletion',
