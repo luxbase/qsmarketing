@@ -1,6 +1,6 @@
 ---
 import { t, type Lang } from '../i18n';
-import { WHATSAPP_NUMBER, GOOGLE_APPS_SCRIPT_URL } from '../constants';
+import { WHATSAPP_NUMBER, GOOGLE_APPS_SCRIPT_URL, NOTIFICATION_EMAIL } from '../constants';
 
 interface Props { lang: Lang }
 
@@ -670,6 +670,7 @@ const s = dict.modal.steps;
 
 <script define:vars={{
     APPS_SCRIPT_URL: GOOGLE_APPS_SCRIPT_URL,
+    NOTIFICATION_EMAIL,
     WHATSAPP_BASE,
     NAME_ERROR: s[0].nameError,
     MODE_ERROR: s[0].modeLabel,
@@ -967,6 +968,7 @@ const s = dict.modal.steps;
                 telefono: phone,
                 servicio: mode,
                 mensaje: `Estilo: ${style}`,
+                notificationEmail: NOTIFICATION_EMAIL,
                 files: filesArr
             };
 
