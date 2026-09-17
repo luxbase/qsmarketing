@@ -815,7 +815,6 @@ const s = dict.modal.steps;
 
     const show = (el) => { if (el) el.style.display = 'flex'; };
     const hide = (el) => { if (el) el.style.display = 'none'; };
-    const block = (el) => { if (el) el.style.display = ''; };
 
     function openModal() {
         triggerEl = document.activeElement;
@@ -907,7 +906,7 @@ const s = dict.modal.steps;
         document.querySelectorAll('.error-msg').forEach(e => e.textContent = '');
         hide(SUCCESS);
         hide(ERROR);
-        block(FORM_WRAPPER);
+        show(FORM_WRAPPER);
         hide(LOADING);
         goToStep(1);
     }
@@ -1036,7 +1035,7 @@ const s = dict.modal.steps;
         const stepIndicator = els('stepIndicator');
         if (stepIndicator) stepIndicator.style.display = 'none';
 
-        block(LOADING);
+        show(LOADING);
         hide(FORM_WRAPPER);
         hide(ERROR);
 
@@ -1076,7 +1075,8 @@ const s = dict.modal.steps;
                 filesArr.push({
                     name: fileData.name,
                     mimeType: fileData.type,
-                    base64: base64Data
+                    // Apps Script's Utilities.base64Decode expects only the payload, not the Data URL prefix.
+                    base64: String(base64Data).split(',', 2)[1]
                 });
             }
 
@@ -1119,7 +1119,7 @@ const s = dict.modal.steps;
             console.error('Submission error:', err);
             if (stepIndicator) stepIndicator.style.display = 'flex';
             hide(LOADING);
-            block(ERROR);
+            show(ERROR);
         }
     });
 
@@ -1132,7 +1132,7 @@ const s = dict.modal.steps;
         const stepIndicator = els('stepIndicator');
         if (stepIndicator) stepIndicator.style.display = 'flex';
         hide(ERROR);
-        block(FORM_WRAPPER);
+        show(FORM_WRAPPER);
     });
 
     // Init
