@@ -220,8 +220,8 @@ export default {
       'Finalizing your request...'
     ],
     success: {
-      title: 'Request received!',
-      text: 'We received your request. We\'ll contact you soon to coordinate your free sample. If you don\'t hear back within 24 hours, message us directly.',
+      title: 'Request sent!',
+      text: 'Your request was sent for processing. If you do not hear back within 24 hours, message us on WhatsApp to confirm it.',
       waCta: 'Message us on WhatsApp →',
       waMessage: 'Hi Qualis Studio! I\'m {name}. I sent my free staging sample request.',
       newRequest: 'New request',

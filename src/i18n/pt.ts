@@ -220,8 +220,8 @@ export default {
       'Finalizando sua solicitação...'
     ],
     success: {
-      title: 'Solicitação recebida!',
-      text: 'Recebemos sua solicitação. Entraremos em contato em breve para coordenar sua amostra grátis. Se não receber resposta em 24 horas, fale conosco diretamente.',
+      title: 'Solicitação enviada!',
+      text: 'Sua solicitação foi enviada para processamento. Se não receber resposta em 24 horas, fale conosco pelo WhatsApp para confirmá-la.',
       waCta: 'Fale conosco no WhatsApp →',
       waMessage: 'Olá Qualis Studio! Sou {name}. Enviei minha solicitação de amostra grátis de staging.',
       newRequest: 'Nova solicitação',
