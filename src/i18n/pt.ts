@@ -211,7 +211,14 @@ export default {
     back: 'Voltar',
     next: 'Próximo',
     submit: 'Solicitar amostra grátis',
-    loading: 'Enviando solicitação...',
+    loadingTitle: 'Enviando solicitação',
+    loading: 'Processando sua amostra grátis...',
+    loadingSteps: [
+      'Otimizando imagens...',
+      'Conectando ao Google Drive seguro...',
+      'Criando pasta e salvando arquivos...',
+      'Finalizando sua solicitação...'
+    ],
     success: {
       title: 'Solicitação recebida!',
       text: 'Recebemos sua solicitação. Entraremos em contato em breve para coordenar sua amostra grátis. Se não receber resposta em 24 horas, fale conosco diretamente.',

@@ -211,7 +211,14 @@ export default {
     back: 'Atrás',
     next: 'Siguiente',
     submit: 'Solicitar muestra gratis',
-    loading: 'Enviando solicitud...',
+    loadingTitle: 'Enviando solicitud',
+    loading: 'Procesando tu muestra gratis...',
+    loadingSteps: [
+      'Optimizando imágenes...',
+      'Conectando con Google Drive seguro...',
+      'Creando carpeta y guardando archivos...',
+      'Finalizando tu solicitud...'
+    ],
     success: {
       title: '¡Solicitud recibida!',
       text: 'Recibimos tu solicitud. Te contactaremos pronto para coordinar tu muestra gratis. Si no recibís respuesta en 24 horas, escribinos directo.',
