@@ -1,3 +1,5 @@
+import { WHATSAPP_NUMBER } from '../constants';
+
 export default {
   lang: 'pt',
   label: 'Português',
@@ -10,7 +12,7 @@ export default {
   },
   header: {
     homeLabel: 'Início da Qualis Studio',
-    whatsappUrl: 'https://wa.me/18457464385?text=Ol%C3%A1%20Qualis%20Studio!%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os%20de%20staging%20digital.',
+    whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%20Qualis%20Studio!%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os%20de%20staging%20digital.`,
     servicios: 'Serviços',
     proceso: 'Processo',
     resultados: 'Resultados',
@@ -68,7 +70,7 @@ export default {
           'Recebe o ZIP em 24 horas',
         ],
     cta: 'Melhorar meu anúncio →',
-        ctaUrl: 'https://wa.me/18457464385?text=Ol%C3%A1%20Qualis%20Studio!%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os%20de%20staging%20digital.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%20Qualis%20Studio!%20Gostaria%20de%20receber%20informa%C3%A7%C3%B5es%20sobre%20seus%20servi%C3%A7os%20de%20staging%20digital.`,
       },
       {
         name: 'Plano Pro',
@@ -85,7 +87,7 @@ export default {
           'Grupo de WhatsApp dedicado',
         ],
         cta: 'Começar →',
-        ctaUrl: 'https://wa.me/18457464385?text=Ol%C3%A1%20Qualis!%20Quero%20consultar%20sobre%20o%20Plano%20Pro.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%20Qualis!%20Quero%20consultar%20sobre%20o%20Plano%20Pro.`,
       },
       {
         name: 'Plano Agência',
@@ -102,7 +104,7 @@ export default {
           'Texto bilíngue (ES + PT ou EN)',
         ],
         cta: 'Contatar →',
-        ctaUrl: 'https://wa.me/18457464385?text=Ol%C3%A1%20Qualis!%20Quero%20consultar%20sobre%20o%20Plano%20Ag%C3%AAncia.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%20Qualis!%20Quero%20consultar%20sobre%20o%20Plano%20Ag%C3%AAncia.`,
       },
     ],
     popularBadge: 'RECOMENDADO',
@@ -112,7 +114,7 @@ export default {
       title: '★ ★ Primeira vez? Seu primeiro anúncio é grátis.',
       desc: 'Vaga limitada às primeiras 10 agências. Consulte pelo WhatsApp sem compromisso.',
       cta: 'Solicitar →',
-      waUrl: 'https://wa.me/18457464385?text=Ol%C3%A1%20Qualis%20Studio!%20Quero%20solicitar%20meu%20primeiro%20an%C3%BAncio%20gr%C3%A1tis.',
+      waUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%20Qualis%20Studio!%20Quero%20solicitar%20meu%20primeiro%20an%C3%BAncio%20gr%C3%A1tis.`,
       referral: '💰 Tem colegas? Para cada agência indicada, ganhe 10% de desconto no seu próximo serviço.',
     },
   },
