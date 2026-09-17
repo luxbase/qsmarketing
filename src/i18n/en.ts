@@ -1,3 +1,5 @@
+import { WHATSAPP_NUMBER } from '../constants';
+
 export default {
   lang: 'en',
   label: 'English',
@@ -10,7 +12,7 @@ export default {
   },
   header: {
     homeLabel: 'Qualis Studio Home',
-    whatsappUrl: 'https://wa.me/18457464385?text=Hi%20Qualis%20Studio!%20I%27d%20like%20information%20about%20your%20digital%20staging%20services.',
+    whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Qualis%20Studio!%20I%27d%20like%20information%20about%20your%20digital%20staging%20services.`,
     servicios: 'Services',
     proceso: 'Process',
     resultados: 'Results',
@@ -68,7 +70,7 @@ export default {
           'You get the ZIP in 24 hours',
         ],
         cta: 'Request →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hi%20Qualis%20Studio!%20I%27d%20like%20information%20about%20your%20digital%20staging%20services.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Qualis%20Studio!%20I%27d%20like%20information%20about%20your%20digital%20staging%20services.`,
       },
       {
         name: 'Plan Pro',
@@ -85,7 +87,7 @@ export default {
           'Dedicated WhatsApp group',
         ],
         cta: 'Start →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Pro.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Pro.`,
       },
       {
         name: 'Plan Agency',
@@ -102,7 +104,7 @@ export default {
           'Bilingual text (ES + PT or EN)',
         ],
         cta: 'Contact →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Agency.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Qualis!%20I%20want%20to%20ask%20about%20the%20Plan%20Agency.`,
       },
     ],
     popularBadge: 'RECOMMENDED',
@@ -112,7 +114,7 @@ export default {
       title: '★ ★ First time? Your first listing is free.',
       desc: 'Limited to the first 10 agencies. Ask on WhatsApp with no commitment.',
       cta: 'Claim now →',
-      waUrl: 'https://wa.me/18457464385?text=Hi%20Qualis%20Studio!%20I%20want%20to%20claim%20my%20free%20first%20listing.',
+      waUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Qualis%20Studio!%20I%20want%20to%20claim%20my%20free%20first%20listing.`,
       referral: '💰 Know colleagues? For each agency you refer, get 10% off your next service.',
     },
   },

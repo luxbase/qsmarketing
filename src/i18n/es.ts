@@ -1,3 +1,5 @@
+import { WHATSAPP_NUMBER } from '../constants';
+
 export default {
   lang: 'es',
   label: 'Español',
@@ -10,7 +12,7 @@ export default {
   },
   header: {
     homeLabel: 'Inicio de Qualis Studio',
-    whatsappUrl: 'https://wa.me/18457464385?text=Hola%20Qualis%20Studio!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital.',
+    whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hola%20Qualis%20Studio!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital.`,
     servicios: 'Servicios',
     proceso: 'Proceso',
     resultados: 'Resultados',
@@ -68,7 +70,7 @@ export default {
           'Recibís el ZIP en 24 horas',
         ],
     cta: 'Mejorar mi publicación →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hola%20Qualis%20Studio!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hola%20Qualis%20Studio!%20Quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20staging%20digital.`,
       },
       {
         name: 'Plan Pro',
@@ -85,7 +87,7 @@ export default {
           'Grupo de WhatsApp dedicado',
         ],
         cta: 'Empezar →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hola%20Qualis!%20Quiero%20consultar%20por%20el%20Plan%20Pro.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hola%20Qualis!%20Quiero%20consultar%20por%20el%20Plan%20Pro.`,
       },
       {
         name: 'Plan Agencia',
@@ -102,7 +104,7 @@ export default {
           'Texto bilingüe (ES + PT o EN)',
         ],
         cta: 'Contactar →',
-        ctaUrl: 'https://wa.me/18457464385?text=Hola%20Qualis!%20Quiero%20consultar%20por%20el%20Plan%20Agencia.',
+        ctaUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hola%20Qualis!%20Quiero%20consultar%20por%20el%20Plan%20Agencia.`,
       },
     ],
     popularBadge: 'RECOMENDADO',
@@ -112,7 +114,7 @@ export default {
       title: '★ ★ ¿Primera vez? Tu primer listing va gratis.',
       desc: 'Cupo limitado a las primeras 10 agencias. Consultanos por WhatsApp sin compromiso.',
       cta: 'Reclamar →',
-      waUrl: 'https://wa.me/18457464385?text=Hola%20Qualis%20Studio!%20Quiero%20reclamar%20mi%20primer%20listing%20gratis.',
+      waUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=Hola%20Qualis%20Studio!%20Quiero%20reclamar%20mi%20primer%20listing%20gratis.`,
       referral: '💰 ¿Tenés colegas? Por cada agencia referida, recibís 10% de descuento en tu próximo servicio.',
     },
   },
