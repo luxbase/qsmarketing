@@ -211,7 +211,14 @@ export default {
     back: 'Back',
     next: 'Next',
     submit: 'Request Free Sample',
-    loading: 'Sending request...',
+    loadingTitle: 'Submitting request',
+    loading: 'Processing your free sample...',
+    loadingSteps: [
+      'Optimizing images...',
+      'Connecting to secure Google Drive...',
+      'Creating folder and saving files...',
+      'Finalizing your request...'
+    ],
     success: {
       title: 'Request received!',
       text: 'We received your request. We\'ll contact you soon to coordinate your free sample. If you don\'t hear back within 24 hours, message us directly.',

@@ -101,8 +101,23 @@ const s = dict.modal.steps;
         </form>
 
         <div id="loadingContainer" style="display:none">
-            <div class="spinner"></div>
-            <p>{dict.modal.loading}</p>
+            <div class="loading-orb-wrapper">
+                <div class="loading-glow"></div>
+                <div class="loading-ring"></div>
+                <div class="loading-ring-inner"></div>
+                <div class="loading-icon-center">
+                    <svg class="loading-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+                        <path d="M12 12v9"/>
+                        <path d="m16 16-4-4-4 4"/>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="loading-title">{dict.modal.loadingTitle || "Enviando solicitud"}</h3>
+            <p class="loading-subtitle" id="loadingStatusText">{dict.modal.loading}</p>
+            <div class="loading-progress-track">
+                <div class="loading-progress-bar" id="loadingProgressBar"></div>
+            </div>
         </div>
 
         <div id="successContainer" style="display:none">
@@ -532,29 +547,110 @@ const s = dict.modal.steps;
     .btn-next:hover, .btn-submit:hover { background: #d4ae65; }
     .btn-next:disabled, .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    /* Loading */
+    /* Loading Visual */
     #loadingContainer {
         display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         flex: 1;
-        gap: 16px;
-        padding: 60px 24px;
+        text-align: center;
+        padding: 50px 24px;
     }
 
-    .spinner {
-        width: 36px;
-        height: 36px;
-        border: 3px solid rgba(232,194,122,0.2);
+    .loading-orb-wrapper {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-glow {
+        position: absolute;
+        inset: -12px;
+        background: radial-gradient(circle, rgba(232, 194, 122, 0.4) 0%, rgba(232, 194, 122, 0) 70%);
+        filter: blur(10px);
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    .loading-ring {
+        position: absolute;
+        inset: 0;
+        border: 3px solid rgba(232, 194, 122, 0.15);
         border-top-color: #e8c27a;
+        border-right-color: #e8c27a;
         border-radius: 50%;
-        animation: spin 0.7s linear infinite;
+        animation: spin 0.9s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+    }
+
+    .loading-ring-inner {
+        position: absolute;
+        inset: 8px;
+        border: 1.5px dashed rgba(232, 194, 122, 0.4);
+        border-radius: 50%;
+        animation: spinReverse 3.5s linear infinite;
+    }
+
+    .loading-icon-center {
+        position: relative;
+        z-index: 2;
+        width: 32px;
+        height: 32px;
+        color: #e8c27a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: floatIcon 1.8s ease-in-out infinite;
+    }
+
+    .loading-svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .loading-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.35rem;
+        color: #ffffff;
+        font-weight: 600;
+        margin: 0 0 6px;
+        letter-spacing: -0.01em;
+    }
+
+    .loading-subtitle {
+        color: #a0a0a0;
+        font-size: 0.9rem;
+        margin: 0 0 20px;
+        height: 1.4em;
+        transition: opacity 0.25s ease;
+    }
+
+    .loading-progress-track {
+        width: 100%;
+        max-width: 260px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .loading-progress-bar {
+        height: 100%;
+        width: 5%;
+        background: linear-gradient(90deg, #c5a059, #e8c27a, #ffffff);
+        border-radius: 10px;
+        transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 0 8px rgba(232, 194, 122, 0.6);
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    #loadingContainer p { color: #a0a0a0; font-size: 0.9rem; }
+    @keyframes spinReverse { to { transform: rotate(-360deg); } }
+    @keyframes pulseGlow { 0% { opacity: 0.5; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1.1); } }
+    @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
     /* Success */
     #successContainer {
@@ -678,6 +774,7 @@ const s = dict.modal.steps;
     PHOTO_ERROR_FORMAT: s[2].photoErrorFormat,
     PHOTO_ERROR_SIZE: s[2].photoErrorSize,
     WA_MESSAGE_TEMPLATE: dict.modal.success.waMessage,
+    LOADING_STEPS: dict.modal.loadingSteps || [],
 }}>
     const MODAL = document.getElementById('qualisModal');
     const FORM = document.getElementById('wizardForm');
@@ -931,14 +1028,41 @@ const s = dict.modal.steps;
         if (currentStep > 1) goToStep(currentStep - 1);
     });
 
-    // Submit — post to Google Apps Script (Drive)
+    // Submit — post to Google Apps Script (Drive) with animated loading
     FORM?.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (els('btnSubmit').disabled) return;
 
+        const stepIndicator = els('stepIndicator');
+        if (stepIndicator) stepIndicator.style.display = 'none';
+
         block(LOADING);
         hide(FORM_WRAPPER);
         hide(ERROR);
+
+        const statusTextEl = els('loadingStatusText');
+        const progressBarEl = els('loadingProgressBar');
+        
+        let progress = 10;
+        let stepIdx = 0;
+        if (progressBarEl) progressBarEl.style.width = '10%';
+
+        const interval = setInterval(() => {
+            if (LOADING_STEPS && LOADING_STEPS.length > 0) {
+                stepIdx = (stepIdx + 1) % LOADING_STEPS.length;
+                if (statusTextEl) {
+                    statusTextEl.style.opacity = '0';
+                    setTimeout(() => {
+                        statusTextEl.textContent = LOADING_STEPS[stepIdx];
+                        statusTextEl.style.opacity = '1';
+                    }, 150);
+                }
+            }
+            if (progress < 85) {
+                progress += Math.floor(Math.random() * 15) + 10;
+                if (progressBarEl) progressBarEl.style.width = `${Math.min(progress, 88)}%`;
+            }
+        }, 750);
 
         try {
             let filesArr = [];
@@ -979,19 +1103,34 @@ const s = dict.modal.steps;
                 body: JSON.stringify(payload)
             });
 
-            const msg = WA_MESSAGE_TEMPLATE.replace('{name}', name).replace('{mode}', mode);
-            els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
+            clearInterval(interval);
+            if (progressBarEl) progressBarEl.style.width = '100%';
 
-            hide(LOADING);
-            show(SUCCESS);
+            setTimeout(() => {
+                const msg = WA_MESSAGE_TEMPLATE.replace('{name}', name).replace('{mode}', mode);
+                els('successWaLink').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
+
+                hide(LOADING);
+                show(SUCCESS);
+            }, 300);
+
         } catch (err) {
+            clearInterval(interval);
             console.error('Submission error:', err);
+            if (stepIndicator) stepIndicator.style.display = 'flex';
             hide(LOADING);
             block(ERROR);
         }
     });
 
+    els('btnNew')?.addEventListener('click', () => {
+        const stepIndicator = els('stepIndicator');
+        if (stepIndicator) stepIndicator.style.display = 'flex';
+    });
+
     els('btnRetry')?.addEventListener('click', () => {
+        const stepIndicator = els('stepIndicator');
+        if (stepIndicator) stepIndicator.style.display = 'flex';
         hide(ERROR);
         block(FORM_WRAPPER);
     });
