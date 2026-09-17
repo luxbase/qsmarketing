@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luxbase/qs.git"
+    "url": "git+https://github.com/luxbase/qsmarketing.git"
   },
   "bugs": {
-    "url": "https://github.com/luxbase/qs/issues"
+    "url": "https://github.com/luxbase/qsmarketing/issues"
   },
-  "homepage": "https://github.com/luxbase/qs#readme",
+  "homepage": "https://github.com/luxbase/qsmarketing#readme",
   "overrides": {
     "esbuild": "0.28.1"
   },
